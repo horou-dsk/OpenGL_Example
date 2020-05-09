@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.14)
+project(OpenGL1)
+
+if (CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE EQUAL "None" OR NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  message(STATUS "----- CMAKE_BUILD_TYPE is Debug")
+elseif (CMAKE_BUILD_TYPE MATCHES "Release")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fexec-charset=GBK")
+  message(STATUS "----- CMAKE_BUILD_TYPE is Release")
+elseif (CMAKE_BUILD_TYPE MATCHES "RelWitchDebInfo")
+  message(STATUS "----- CMAKE_BUILD_TYPE is RelWitchDebInfo")
+elseif (CMAKE_BUILD_TYPE MATCHES "MinSizeRel")
+  message(STATUS "----- CMAKE_BUILD_TYPE is MinSizeRel")
+else ()
+  message(STATUS "----- unknown CMAKE_BUILD_TYPE = " ${CMAKE_BUILD_TYPE})
+endif ()
+
+set(CMAKE_CXX_STANDARD 11)
+#set(SOURCE_FILES src)
+set(INC_DIR includes)
+set(LINK_DIR lib)
+add_subdirectory(src)
+include_directories(${INC_DIR})
+include_directories(src)
+link_directories(${LINK_DIR})
+link_libraries(glfw3)
+
+add_subdirectory(examples)
+
+add_executable(OpenGL1 main.cpp ${SOURCE_FILES})
+
+target_link_libraries(OpenGL1 SRCS)

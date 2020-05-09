@@ -1,0 +1,2 @@
+#define _PROJECT_DIR "@_ProjectDir@"
+#define PROJECT_PATH(PATH) _PROJECT_DIR PATH
